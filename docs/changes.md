@@ -226,3 +226,29 @@ Migration notes:
 
 Validation status:
 - Syntax check passed for `app.py` (`python -m compileall app.py`).
+
+## 2026-02-08 (Repository polish: tests, gate, CI, hygiene)
+
+Summary of change:
+- Added lightweight unit tests for reusable ML pipeline utilities.
+- Added local gate script with lint/typecheck/test/docs checks.
+- Added GitHub Actions gate workflow for push/PR checks.
+- Removed tracked Python bytecode artifact and updated `.gitignore` for Python cache files.
+- Updated README and project review document to reflect current reproducible/quality-check workflow.
+
+Affected files:
+- `tests/test_ml_pipeline.py`
+- `scripts/gate.sh`
+- `.github/workflows/gate.yml`
+- `.gitignore`
+- `src/__pycache__/mappings.cpython-311.pyc` (deleted)
+- `README.md`
+- `docs/project-review.md`
+- `docs/changes.md`
+
+Migration notes:
+- New recommended verification command: `./scripts/gate.sh`.
+- CI now executes the same gate on GitHub Actions.
+
+Validation status:
+- Ran local gate successfully (`./scripts/gate.sh`).

@@ -2,3 +2,5 @@ data/raw/rentals_raw.csv
 .env
 repomix-output.xml
 .ipynb_checkpoints/
+__pycache__/
+*.py[cod]

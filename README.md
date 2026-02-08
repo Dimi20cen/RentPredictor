@@ -11,6 +11,7 @@ Swiss rental price prediction project with:
 - [Dataset](#dataset)
 - [Replicate Locally](#replicate-locally)
 - [CLI Workflow](#cli-workflow)
+- [Quality Checks](#quality-checks)
 - [Canonical Notebooks](#canonical-notebooks)
 - [Project Structure](#project-structure)
 - [Notes](#notes)
@@ -106,6 +107,23 @@ python scripts/predict.py \
 - `scripts/evaluate.py`: evaluates saved model/encoder on deterministic split.
 - `scripts/predict.py`: batch inference from input CSV.
 
+## Quality Checks
+
+Run tests only:
+
+```bash
+python -m unittest discover -s tests -p "test_*.py" -v
+```
+
+Run full local gate:
+
+```bash
+./scripts/gate.sh
+```
+
+CI:
+- GitHub Actions gate workflow: `.github/workflows/gate.yml`
+
 ## Canonical Notebook Flow
 
 1. `notebooks/01_eda.ipynb`
@@ -135,4 +153,4 @@ RentPredictor/
 ## Notes
 
 - Batch prediction input must include raw preprocessing columns, including `Zip`, `Canton`, and `SubType`.
-- Current workflow is prototype-focused; CI/tests are not yet added.
+- `models/feature_columns.json` is required for robust feature alignment in app/CLI inference.
