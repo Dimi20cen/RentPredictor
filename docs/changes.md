@@ -140,3 +140,37 @@ Migration notes:
 
 Validation status:
 - Mermaid block updated with GitHub-safe label format.
+
+## 2026-02-08 (README restructure for results + replication)
+
+Summary of change:
+- Removed architecture diagram from README.
+- Added dedicated `Results and Demo` section with current headline metrics and local app demo command.
+- Reorganized README for easier replication with navigation + step-by-step local workflow.
+
+Affected files:
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- No runtime changes.
+- Documentation-only update.
+
+Validation status:
+- Verified section links and command paths in README.
+
+## 2026-02-08 (README dataset section)
+
+Summary of change:
+- Added a concise `Dataset` section to README with data lineage, repository data files, and preprocessing caveats from notebooks.
+
+Affected files:
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- No runtime changes.
+- Documentation-only update.
+
+Validation status:
+- Verified referenced dataset files exist in `data/`.

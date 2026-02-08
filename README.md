@@ -5,14 +5,68 @@ Swiss rental price prediction project with:
 - reproducible train/evaluate/predict scripts,
 - and a Streamlit app for interactive inference.
 
-## Quick Start
+## Navigation
+
+- [Results and Demo](#results-and-demo)
+- [Dataset](#dataset)
+- [Replicate Locally](#replicate-locally)
+- [CLI Workflow](#cli-workflow)
+- [Canonical Notebooks](#canonical-notebooks)
+- [Project Structure](#project-structure)
+- [Notes](#notes)
+
+## Results and Demo
+
+### Key Results (current baseline run)
+
+- MAE: `347.02 CHF`
+- RMSE: `748.05 CHF`
+- R2: `0.7856`
+
+These metrics come from the reproducible CLI pipeline (`train.py` / `evaluate.py`) on `data/processed/02_featured_data.pkl`.
+
+### Demo
+
+- Local interactive demo:
+
+```bash
+streamlit run app.py
+```
+
+- App URL (local): `http://localhost:8501`
+
+## Dataset
+
+### Data lineage (from notebooks)
+
+- Raw scrape (not committed): ~22,515 listings from ImmoScout24 (`notebooks/01_eda.ipynb`).
+- Cleaned residential set: ~16,399 rows after filtering/cleaning (`data/processed/01_cleaned_data.pkl`).
+- Featured modeling set: engineered dataset used for training/inference (`data/processed/02_featured_data.pkl`).
+- External enrichment: Swiss municipal/cantonal tax data from `data/external/tax_data_2025.csv`.
+
+### Files in this repository
+
+- `data/processed/01_cleaned_data.pkl` / `.csv`: output of EDA + cleaning.
+- `data/processed/02_featured_data.pkl`: canonical training/evaluation dataset.
+- `data/processed/rentals_ready_for_modeling.csv`: modeling-ready export.
+- `data/external/tax_data_2025.csv`: tax feature source.
+
+### Important preprocessing notes
+
+- Tax feature (`tax_rate`) is merged by city/commune mapping.
+- If an exact city match fails, notebooks apply canton-level median fallback.
+- Training and app inference both expect raw columns such as `Zip`, `Canton`, and `SubType` before encoding.
+
+## Replicate Locally
+
+### 1) Create environment
 
 ```bash
 conda env create -f environment.yml
 conda activate swiss-rental
 ```
 
-Train artifacts:
+### 2) Train artifacts
 
 ```bash
 python scripts/train.py \
@@ -23,7 +77,7 @@ python scripts/train.py \
   --feature-columns-out models/feature_columns.json
 ```
 
-Evaluate:
+### 3) Evaluate saved artifacts
 
 ```bash
 python scripts/evaluate.py \
@@ -33,33 +87,22 @@ python scripts/evaluate.py \
   --metrics-out models/evaluation_metrics.json
 ```
 
-Run app:
+### 4) (Optional) Batch prediction
 
 ```bash
-streamlit run app.py
+python scripts/predict.py \
+  --input-csv path/to/input_features.csv \
+  --output-csv predictions.csv \
+  --model models/xgb_rent_model.pkl \
+  --encoder models/zip_encoder.pkl \
+  --feature-columns models/feature_columns.json
 ```
 
-## Architecture
+## CLI Workflow
 
-```mermaid
-flowchart LR
-    A[data/processed/02_featured_data.pkl] --> B[scripts/train.py]
-    B --> C[models/xgb_rent_model.pkl]
-    B --> D[models/zip_encoder.pkl]
-    B --> E[models/feature_columns.json]
-    C --> F[scripts/evaluate.py]
-    D --> F
-    A --> F
-    F --> G[models/evaluation_metrics.json]
-    C --> H[scripts/predict.py]
-    D --> H
-    E --> H
-    I[input_features.csv] --> H
-    H --> J[predictions.csv]
-    C --> K[streamlit_app]
-    D --> K
-    A --> K
-```
+- `scripts/train.py`: trains model + encoder and writes training metrics/feature columns.
+- `scripts/evaluate.py`: evaluates saved model/encoder on deterministic split.
+- `scripts/predict.py`: batch inference from input CSV.
 
 ## Canonical Notebook Flow
 
