@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-import xgboost as xgb
+import json
 
 # Set Page Config
 st.set_page_config(page_title="Swiss Rent Predictor", layout="centered")
@@ -17,14 +17,18 @@ def load_resources():
     # Load Zip Encoder
     with open('models/zip_encoder.pkl', 'rb') as f:
         encoder = pickle.load(f)
+
+    # Load feature columns used during training
+    with open('models/feature_columns.json', 'r', encoding='utf-8') as f:
+        feature_columns = json.load(f)
         
     # Load Cleaned Data (for dropdown options only)
     # We only need unique Zips, Cantons, and Tax info
     df = pd.read_pickle('data/processed/02_featured_data.pkl')
     
-    return model, encoder, df
+    return model, encoder, feature_columns, df
 
-model, encoder_zip, df_ref = load_resources()
+model, encoder_zip, model_feature_names, df_ref = load_resources()
 
 # --- 2. Helper Functions (Recreating NB 02 Logic) ---
 def haversine_distance(lat1, lon1, lat2, lon2):
@@ -135,11 +139,11 @@ if st.button("Predict Rent", type="primary"):
     # 2. One-Hot Encode (Manual to match training columns)
     # We need to create the exact columns the model saw during training
     # e.g., 'Canton_ZH', 'SubType_LOFT'
-    model_booster = model.get_booster()
-    model_feature_names = model_booster.feature_names
+    # Some XGBoost pickles do not preserve booster feature names.
+    # We load canonical feature names from models/feature_columns.json.
     
     # Create empty df with all model columns initialized to 0
-    X_final = pd.DataFrame(0, index=[0], columns=model_feature_names)
+    X_final = pd.DataFrame(0, index=[0], columns=model_feature_names, dtype=float)
     
     # Fill in the numeric data we have
     for col in X_input.columns:

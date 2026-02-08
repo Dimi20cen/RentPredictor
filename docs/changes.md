@@ -210,3 +210,19 @@ Migration notes:
 
 Validation status:
 - Confirmed `environment.yml` is absent and `environment.dev.yml` exists.
+
+## 2026-02-08 (Streamlit prediction fix)
+
+Summary of change:
+- Fixed Streamlit runtime prediction crash caused by missing XGBoost booster feature names in pickle.
+- Updated app inference path to load canonical feature columns from `models/feature_columns.json`.
+
+Affected files:
+- `app.py`
+- `docs/changes.md`
+
+Migration notes:
+- `models/feature_columns.json` is now a required runtime artifact for app inference.
+
+Validation status:
+- Syntax check passed for `app.py` (`python -m compileall app.py`).
