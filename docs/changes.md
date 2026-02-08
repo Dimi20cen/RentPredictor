@@ -192,3 +192,21 @@ Migration notes:
 
 Validation status:
 - Verified `requirements.txt` is present at repository root.
+
+## 2026-02-08 (Force pip install on Streamlit Cloud)
+
+Summary of change:
+- Renamed `environment.yml` to `environment.dev.yml` so Streamlit Cloud does not select Conda environment solving.
+- Kept local Conda workflow by updating README setup command to the new file name.
+
+Affected files:
+- `environment.dev.yml` (renamed from `environment.yml`)
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- Local setup command changed to `conda env create -f environment.dev.yml`.
+- Streamlit Cloud should now install from `requirements.txt`.
+
+Validation status:
+- Confirmed `environment.yml` is absent and `environment.dev.yml` exists.

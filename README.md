@@ -62,7 +62,7 @@ streamlit run app.py
 ### 1) Create environment
 
 ```bash
-conda env create -f environment.yml
+conda env create -f environment.dev.yml
 conda activate swiss-rental
 ```
 
