@@ -160,7 +160,8 @@ if st.button("Predict Rent", type="primary"):
         X_final[subtype_col] = 1
         
     # E. Predict
-    prediction = model.predict(X_final)[0]
+    prediction_log = model.predict(X_final)[0]
+    prediction = np.expm1(prediction_log)
     
     # F. Display
     st.success(f"### Estimated Rent: CHF {int(prediction):,}")
