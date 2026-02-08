@@ -106,3 +106,21 @@ Validation status:
   - `scripts/train.py`
   - `scripts/evaluate.py`
   - `scripts/predict.py`
+
+## 2026-02-08 (README clarity + architecture diagram)
+
+Summary of change:
+- Rewrote README to be shorter and task-focused.
+- Added a high-level architecture diagram (Mermaid) showing train/evaluate/predict/app flow and artifacts.
+- Updated repository naming in README to `RentPredictor`.
+
+Affected files:
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- No runtime changes.
+- Documentation-only update.
+
+Validation status:
+- Confirmed commands/paths in README match current project layout.
