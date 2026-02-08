@@ -65,6 +65,44 @@ streamlit run app.py
 
 Then open the local URL shown by Streamlit (typically `http://localhost:8501`).
 
+## Reproducible Training Workflow (CLI)
+
+Notebook exploration remains useful, but you can now reproduce core training/evaluation from scripts.
+
+### Train model + encoder
+
+```bash
+python scripts/train.py \
+  --data data/processed/02_featured_data.pkl \
+  --model-out models/xgb_rent_model.pkl \
+  --encoder-out models/zip_encoder.pkl \
+  --metrics-out models/training_metrics.json \
+  --feature-columns-out models/feature_columns.json
+```
+
+### Evaluate saved artifacts
+
+```bash
+python scripts/evaluate.py \
+  --data data/processed/02_featured_data.pkl \
+  --model models/xgb_rent_model.pkl \
+  --encoder models/zip_encoder.pkl \
+  --metrics-out models/evaluation_metrics.json
+```
+
+### Batch prediction
+
+```bash
+python scripts/predict.py \
+  --input-csv path/to/input_features.csv \
+  --output-csv predictions.csv \
+  --model models/xgb_rent_model.pkl \
+  --encoder models/zip_encoder.pkl \
+  --feature-columns models/feature_columns.json
+```
+
+`input_features.csv` should contain raw feature columns expected by preprocessing (including `Zip`, `Canton`, and `SubType`).
+
 ## How Prediction Works (App)
 
 At runtime the app:

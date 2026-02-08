@@ -1,0 +1,13 @@
+{
+  "data_path": "data/processed/02_featured_data.pkl",
+  "random_state": 42,
+  "test_size": 0.2,
+  "train_rows": 12804,
+  "test_rows": 3201,
+  "feature_count": 64,
+  "metrics": {
+    "mae": 347.0159614274592,
+    "rmse": 748.0522572424895,
+    "r2": 0.7855696854324807
+  }
+}
