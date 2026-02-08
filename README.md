@@ -12,7 +12,7 @@ Swiss rental price prediction project with:
 - [Replicate Locally](#replicate-locally)
 - [CLI Workflow](#cli-workflow)
 - [Quality Checks](#quality-checks)
-- [Canonical Notebooks](#canonical-notebooks)
+- [Notebooks](#notebook-flow)
 - [Project Structure](#project-structure)
 - [Notes](#notes)
 
@@ -28,14 +28,13 @@ These metrics come from the reproducible CLI pipeline (`train.py` / `evaluate.py
 
 ### Demo
 
+- Live demo: [https://dimy.dev/projects/rentpredictor](https://dimy.dev/projects/rentpredictor)
+
 - Local interactive demo:
 
 ```bash
 streamlit run app.py
 ```
-
-- App URL (local): `http://localhost:8501`
-- Live demo: `https://dimy.dev/projects/rentpredictor`
 
 ## Dataset
 
@@ -125,7 +124,7 @@ Run full local gate:
 CI:
 - GitHub Actions gate workflow: `.github/workflows/gate.yml`
 
-## Canonical Notebook Flow
+## Notebook Flow
 
 1. `notebooks/01_eda.ipynb`
 2. `notebooks/02_features_and_baseline.ipynb`
