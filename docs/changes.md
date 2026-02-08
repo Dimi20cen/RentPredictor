@@ -252,3 +252,19 @@ Migration notes:
 
 Validation status:
 - Ran local gate successfully (`./scripts/gate.sh`).
+
+## 2026-02-08 (README live demo link)
+
+Summary of change:
+- Added live project demo link (`https://dimy.dev/projects/rentpredictor`) in README demo section.
+
+Affected files:
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- No runtime changes.
+- Documentation-only update.
+
+Validation status:
+- Verified README demo section contains local and live demo links.

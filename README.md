@@ -35,6 +35,7 @@ streamlit run app.py
 ```
 
 - App URL (local): `http://localhost:8501`
+- Live demo: `https://dimy.dev/projects/rentpredictor`
 
 ## Dataset
 
