@@ -174,3 +174,21 @@ Migration notes:
 
 Validation status:
 - Verified referenced dataset files exist in `data/`.
+
+## 2026-02-08 (Streamlit deployment dependencies)
+
+Summary of change:
+- Added `requirements.txt` with minimal runtime dependencies for Streamlit Cloud deployment.
+- Updated README setup section to note `requirements.txt` is used for Streamlit Cloud runtime installs.
+
+Affected files:
+- `requirements.txt`
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- No app logic changes.
+- This improves deployment startup reliability/speed compared to full Conda solve.
+
+Validation status:
+- Verified `requirements.txt` is present at repository root.

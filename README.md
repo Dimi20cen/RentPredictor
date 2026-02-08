@@ -66,6 +66,8 @@ conda env create -f environment.yml
 conda activate swiss-rental
 ```
 
+For Streamlit Cloud deployment, `requirements.txt` is provided with runtime dependencies.
+
 ### 2) Train artifacts
 
 ```bash
