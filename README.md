@@ -38,9 +38,10 @@ streamlit run app.py
 
 ## Dataset
 
-### Data lineage (from notebooks)
+### Data lineage
 
 - Raw scrape (not committed): ~22,515 listings from ImmoScout24 (`notebooks/01_eda.ipynb`).
+  - Scraped using [ImmoScraper](https://github.com/Dimi20cen/ImmoScraper), 12/2025.
 - Cleaned residential set: ~16,399 rows after filtering/cleaning (`data/processed/01_cleaned_data.pkl`).
 - Featured modeling set: engineered dataset used for training/inference (`data/processed/02_featured_data.pkl`).
 - External enrichment: Swiss municipal/cantonal tax data from `data/external/tax_data_2025.csv`.
