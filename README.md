@@ -56,7 +56,7 @@ flowchart LR
     E --> H
     I[input_features.csv] --> H
     H --> J[predictions.csv]
-    C --> K[app.py (Streamlit)]
+    C --> K[streamlit_app]
     D --> K
     A --> K
 ```

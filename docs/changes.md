@@ -124,3 +124,19 @@ Migration notes:
 
 Validation status:
 - Confirmed commands/paths in README match current project layout.
+
+## 2026-02-08 (Mermaid compatibility fix)
+
+Summary of change:
+- Updated architecture diagram node label to avoid Mermaid parse issues in GitHub renderer.
+
+Affected files:
+- `README.md`
+- `docs/changes.md`
+
+Migration notes:
+- No runtime changes.
+- Documentation-only fix.
+
+Validation status:
+- Mermaid block updated with GitHub-safe label format.
